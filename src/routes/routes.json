@@ -1,0 +1,11 @@
+[
+    {
+      "path": "/",
+      "component": "HomePage"
+    },
+    {
+      "path": "/about",
+      "component": "AboutPage"
+    }
+  ]
+  

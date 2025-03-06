@@ -1,25 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import { useDemoStore } from './store/useDemoStore'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Suspense } from 'react';
+import { getRoutes } from './routes/routes-util';
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  const {value, modify}: any = useDemoStore();
+  const routes = getRoutes();
 
   return (
-    <>
-      <h1>{value}</h1>
-      <button onClick={modify}>Change Store</button>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-    </>
-  )
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          {routes.map((route, index) => (
+            <Route key={index} path={route.path} element={<route.element />} />
+          ))}
+        </Routes>
+      </Suspense>
+    </Router>
+  );
 }
 
-export default App
+export default App;
